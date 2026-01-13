@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Media Player</title>
+<style>
+    body {
+        background: #0e0e0e;
+        color: #eaeaea;
+        font-family: monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    video, audio, img {
+        max-width: 90%;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+
+    a {
+        color: #7aa2ff;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Now Playing</h1>
+
+<div id="player"></div>
+
+<a href="index.html">⬅ Back to folder</a>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const src = params.get("src");
+    const player = document.getElementById("player");
+
+    if (type === "video") {
+        player.innerHTML = `
+            <video controls autoplay>
+                <source src="${src}">
+                Your browser does not support this video format.
+            </video>
+        `;
+    } 
+    else if (type === "mp3") {
+        player.innerHTML = `<audio controls autoplay src="${src}"></audio>`;
+    } 
+    else if (type === "image") {
+        player.innerHTML = `<img src="${src}">`;
+    }
+</script>
+
+</body>
+</html>
